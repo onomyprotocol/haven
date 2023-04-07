@@ -1,0 +1,12 @@
+syntax = "proto3";
+package haven.haven;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "haven/x/haven/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (gogoproto.goproto_stringer) = false;
+  
+}
