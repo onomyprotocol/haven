@@ -3,6 +3,7 @@ package haven.haven;
 
 import "gogoproto/gogo.proto";
 import "haven/params.proto";
+import "haven/haven.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
 option go_package = "haven/x/haven/types";
@@ -10,5 +11,6 @@ option go_package = "haven/x/haven/types";
 // GenesisState defines the haven module's genesis state.
 message GenesisState {
   Params params = 1 [(gogoproto.nullable) = false];
+  repeated Haven havenList = 2 [(gogoproto.nullable) = false];
   // this line is used by starport scaffolding # genesis/proto/state
 }

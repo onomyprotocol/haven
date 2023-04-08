@@ -1,11 +1,13 @@
 syntax = "proto3";
 package haven.haven;
 
-import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "haven/params.proto";
+import "haven/haven.proto";
 // this line is used by starport scaffolding # 1
+import "cosmos/base/v1beta1/coin.proto";
+import "gogoproto/gogo.proto";
 
 option go_package = "haven/x/haven/types";
 
@@ -15,7 +17,17 @@ service Query {
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/haven/haven/params";
   }
-  // this line is used by starport scaffolding # 2
+  // Queries a Haven by index.
+	rpc Haven(QueryGetHavenRequest) returns (QueryGetHavenResponse) {
+		option (google.api.http).get = "/haven/haven/haven/{uid}";
+	}
+
+	// Queries a list of Haven items.
+	rpc HavenAll(QueryAllHavenRequest) returns (QueryAllHavenResponse) {
+		option (google.api.http).get = "/haven/haven/haven";
+	}
+
+// this line is used by starport scaffolding # 2
 }
 
 // QueryParamsRequest is request type for the Query/Params RPC method.
@@ -25,6 +37,24 @@ message QueryParamsRequest {}
 message QueryParamsResponse {
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetHavenRequest {
+	  uint64 uid = 1;
+
+}
+
+message QueryGetHavenResponse {
+	Haven haven = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllHavenRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllHavenResponse {
+	repeated Haven haven = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 // this line is used by starport scaffolding # 3
