@@ -1,0 +1,16 @@
+syntax = "proto3";
+package haven.haven;
+
+option go_package = "haven/x/haven/types";
+import "gogoproto/gogo.proto"; 
+import "cosmos/base/v1beta1/coin.proto"; 
+
+message Post {
+  uint64 uid = 1; 
+  string title = 2; 
+  string body = 3; 
+  uint64 haven = 4; 
+  cosmos.base.v1beta1.Coin tips = 5 [(gogoproto.nullable) = false]; 
+  
+}
+

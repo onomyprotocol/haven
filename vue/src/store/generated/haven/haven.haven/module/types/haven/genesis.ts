@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { Params } from "../haven/params";
 import { Haven } from "../haven/haven";
+import { Post } from "../haven/post";
 import { Writer, Reader } from "protobufjs/minimal";
 
 export const protobufPackage = "haven.haven";
@@ -8,8 +9,9 @@ export const protobufPackage = "haven.haven";
 /** GenesisState defines the haven module's genesis state. */
 export interface GenesisState {
   params: Params | undefined;
-  /** this line is used by starport scaffolding # genesis/proto/state */
   havenList: Haven[];
+  /** this line is used by starport scaffolding # genesis/proto/state */
+  postList: Post[];
 }
 
 const baseGenesisState: object = {};
@@ -22,6 +24,9 @@ export const GenesisState = {
     for (const v of message.havenList) {
       Haven.encode(v!, writer.uint32(18).fork()).ldelim();
     }
+    for (const v of message.postList) {
+      Post.encode(v!, writer.uint32(26).fork()).ldelim();
+    }
     return writer;
   },
 
@@ -30,6 +35,7 @@ export const GenesisState = {
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = { ...baseGenesisState } as GenesisState;
     message.havenList = [];
+    message.postList = [];
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -38,6 +44,9 @@ export const GenesisState = {
           break;
         case 2:
           message.havenList.push(Haven.decode(reader, reader.uint32()));
+          break;
+        case 3:
+          message.postList.push(Post.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -50,6 +59,7 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     const message = { ...baseGenesisState } as GenesisState;
     message.havenList = [];
+    message.postList = [];
     if (object.params !== undefined && object.params !== null) {
       message.params = Params.fromJSON(object.params);
     } else {
@@ -58,6 +68,11 @@ export const GenesisState = {
     if (object.havenList !== undefined && object.havenList !== null) {
       for (const e of object.havenList) {
         message.havenList.push(Haven.fromJSON(e));
+      }
+    }
+    if (object.postList !== undefined && object.postList !== null) {
+      for (const e of object.postList) {
+        message.postList.push(Post.fromJSON(e));
       }
     }
     return message;
@@ -74,12 +89,20 @@ export const GenesisState = {
     } else {
       obj.havenList = [];
     }
+    if (message.postList) {
+      obj.postList = message.postList.map((e) =>
+        e ? Post.toJSON(e) : undefined
+      );
+    } else {
+      obj.postList = [];
+    }
     return obj;
   },
 
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = { ...baseGenesisState } as GenesisState;
     message.havenList = [];
+    message.postList = [];
     if (object.params !== undefined && object.params !== null) {
       message.params = Params.fromPartial(object.params);
     } else {
@@ -88,6 +111,11 @@ export const GenesisState = {
     if (object.havenList !== undefined && object.havenList !== null) {
       for (const e of object.havenList) {
         message.havenList.push(Haven.fromPartial(e));
+      }
+    }
+    if (object.postList !== undefined && object.postList !== null) {
+      for (const e of object.postList) {
+        message.postList.push(Post.fromPartial(e));
       }
     }
     return message;
