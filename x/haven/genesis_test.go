@@ -22,6 +22,14 @@ func TestGenesis(t *testing.T) {
 				Uid: 1,
 			},
 		},
+		PostList: []types.Post{
+			{
+				Uid: 0,
+			},
+			{
+				Uid: 1,
+			},
+		},
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -34,5 +42,6 @@ func TestGenesis(t *testing.T) {
 	nullify.Fill(got)
 
 	require.ElementsMatch(t, genesisState.HavenList, got.HavenList)
+	require.ElementsMatch(t, genesisState.PostList, got.PostList)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

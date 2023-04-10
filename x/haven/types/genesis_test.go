@@ -30,6 +30,14 @@ func TestGenesisState_Validate(t *testing.T) {
 						Uid: 1,
 					},
 				},
+				PostList: []types.Post{
+					{
+						Uid: 0,
+					},
+					{
+						Uid: 1,
+					},
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
@@ -38,6 +46,20 @@ func TestGenesisState_Validate(t *testing.T) {
 			desc: "duplicated haven",
 			genState: &types.GenesisState{
 				HavenList: []types.Haven{
+					{
+						Uid: 0,
+					},
+					{
+						Uid: 0,
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated post",
+			genState: &types.GenesisState{
+				PostList: []types.Post{
 					{
 						Uid: 0,
 					},

@@ -29,6 +29,24 @@ export interface HavenHaven {
  */
 export type HavenParams = object;
 
+export interface HavenPost {
+  /** @format uint64 */
+  uid?: string;
+  title?: string;
+  body?: string;
+
+  /** @format uint64 */
+  haven?: string;
+
+  /**
+   * Coin defines a token with a denomination and an amount.
+   *
+   * NOTE: The amount field is an Int which implements the custom method
+   * signatures required by gogoproto.
+   */
+  tips?: V1Beta1Coin;
+}
+
 export interface HavenQueryAllHavenResponse {
   haven?: HavenHaven[];
 
@@ -44,8 +62,27 @@ export interface HavenQueryAllHavenResponse {
   pagination?: V1Beta1PageResponse;
 }
 
+export interface HavenQueryAllPostResponse {
+  post?: HavenPost[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
 export interface HavenQueryGetHavenResponse {
   haven?: HavenHaven;
+}
+
+export interface HavenQueryGetPostResponse {
+  post?: HavenPost;
 }
 
 /**
@@ -390,6 +427,48 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryParams = (params: RequestParams = {}) =>
     this.request<HavenQueryParamsResponse, RpcStatus>({
       path: `/haven/haven/params`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryPostAll
+   * @summary Queries a list of Post items.
+   * @request GET:/haven/haven/post
+   */
+  queryPostAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<HavenQueryAllPostResponse, RpcStatus>({
+      path: `/haven/haven/post`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryPost
+   * @summary Queries a Post by index.
+   * @request GET:/haven/haven/post/{uid}
+   */
+  queryPost = (uid: string, params: RequestParams = {}) =>
+    this.request<HavenQueryGetPostResponse, RpcStatus>({
+      path: `/haven/haven/post/${uid}`,
       method: "GET",
       format: "json",
       ...params,
