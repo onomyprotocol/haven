@@ -8,5 +8,7 @@ import (
 
 // x/haven module sentinel errors
 var (
-	ErrSample = sdkerrors.Register(ModuleName, 1100, "sample error")
+	// ErrHavenAlreadyExists - haven with proposed name already exists
+	ErrHavenAlreadyExists = sdkerrors.Register(ModuleName, 1, "the haven already exists") // nolint: gomnd
+
 )

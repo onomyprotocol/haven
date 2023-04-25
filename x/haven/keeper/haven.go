@@ -1,26 +1,40 @@
 package keeper
 
 import (
+	"encoding/binary"
+	"haven/x/haven/types"
+
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"haven/x/haven/types"
 )
 
 // SetHaven set a specific haven in the store from its index
 func (k Keeper) SetHaven(ctx sdk.Context, haven types.Haven) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.HavenKeyPrefix))
+	storeHaven := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.HavenKeyPrefix))
 	b := k.cdc.MustMarshal(&haven)
-	store.Set(types.HavenKey(
+	storeHaven.Set(types.HavenKey(
 		haven.Uid,
 	), b)
+
+	storeName := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.HavenNamePrefix))
+	var bz []byte
+	binary.BigEndian.PutUint64(bz, haven.Uid)
+	storeName.Set(types.HavenNameKey(
+		haven.Name,
+	), bz)
+
 }
 
-// GetHaven returns a haven from its index
+// GetHaven returns a haven from uid
 func (k Keeper) GetHaven(
 	ctx sdk.Context,
 	uid uint64,
 
 ) (val types.Haven, found bool) {
+	if uid == 0 {
+		return val, false
+	}
+
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.HavenKeyPrefix))
 
 	b := store.Get(types.HavenKey(
@@ -32,6 +46,24 @@ func (k Keeper) GetHaven(
 
 	k.cdc.MustUnmarshal(b, &val)
 	return val, true
+}
+
+// GetHaven returns a haven from uid
+func (k Keeper) GetHavenUid(
+	ctx sdk.Context,
+	name string,
+) uint64 {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.HavenNamePrefix))
+
+	b := store.Get(types.HavenNameKey(
+		name,
+	))
+	if b == nil {
+		return 0
+	}
+
+	// Parse bytes
+	return binary.BigEndian.Uint64(b)
 }
 
 // RemoveHaven removes a haven from the store

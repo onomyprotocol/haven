@@ -24,6 +24,8 @@ export interface HavenHaven {
   balance?: V1Beta1Coin;
 }
 
+export type HavenMsgCreateHavenResponse = object;
+
 /**
  * Params defines the parameters for the module.
  */
