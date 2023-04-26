@@ -8,6 +8,7 @@ option go_package = "haven/x/haven/types";
 // Msg defines the Msg service.
 service Msg {
       rpc CreateHaven(MsgCreateHaven) returns (MsgCreateHavenResponse);
+  rpc CreatePost(MsgCreatePost) returns (MsgCreatePostResponse);
 // this line is used by starport scaffolding # proto/tx/rpc
 }
 
@@ -17,6 +18,16 @@ message MsgCreateHaven {
 }
 
 message MsgCreateHavenResponse {
+}
+
+message MsgCreatePost {
+  string creator = 1;
+  string title = 2;
+  string body = 3;
+  string haven = 4;
+}
+
+message MsgCreatePostResponse {
 }
 
 // this line is used by starport scaffolding # proto/tx/message

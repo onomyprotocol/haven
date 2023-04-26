@@ -4,10 +4,12 @@ import { StdFee } from "@cosmjs/launchpad";
 import { SigningStargateClient } from "@cosmjs/stargate";
 import { Registry, OfflineSigner, EncodeObject, DirectSecp256k1HdWallet } from "@cosmjs/proto-signing";
 import { Api } from "./rest";
+import { MsgCreatePost } from "./types/haven/tx";
 import { MsgCreateHaven } from "./types/haven/tx";
 
 
 const types = [
+  ["/haven.haven.MsgCreatePost", MsgCreatePost],
   ["/haven.haven.MsgCreateHaven", MsgCreateHaven],
   
 ];
@@ -41,6 +43,7 @@ const txClient = async (wallet: OfflineSigner, { addr: addr }: TxClientOptions =
 
   return {
     signAndBroadcast: (msgs: EncodeObject[], { fee, memo }: SignAndBroadcastOptions = {fee: defaultFee, memo: ""}) => client.signAndBroadcast(address, msgs, fee,memo),
+    msgCreatePost: (data: MsgCreatePost): EncodeObject => ({ typeUrl: "/haven.haven.MsgCreatePost", value: MsgCreatePost.fromPartial( data ) }),
     msgCreateHaven: (data: MsgCreateHaven): EncodeObject => ({ typeUrl: "/haven.haven.MsgCreateHaven", value: MsgCreateHaven.fromPartial( data ) }),
     
   };

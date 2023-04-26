@@ -26,6 +26,8 @@ export interface HavenHaven {
 
 export type HavenMsgCreateHavenResponse = object;
 
+export type HavenMsgCreatePostResponse = object;
+
 /**
  * Params defines the parameters for the module.
  */
