@@ -19169,21 +19169,9 @@ paths:
                       type: string
                     owner:
                       type: string
-                    balance:
-                      type: object
-                      properties:
-                        denom:
-                          type: string
-                        amount:
-                          type: string
-                      description: >-
-                        Coin defines a token with a denomination and an amount.
-
-
-                        NOTE: The amount field is an Int which implements the
-                        custom method
-
-                        signatures required by gogoproto.
+                    rake:
+                      type: string
+                      format: uint64
               pagination:
                 type: object
                 properties:
@@ -19298,21 +19286,9 @@ paths:
                     type: string
                   owner:
                     type: string
-                  balance:
-                    type: object
-                    properties:
-                      denom:
-                        type: string
-                      amount:
-                        type: string
-                    description: >-
-                      Coin defines a token with a denomination and an amount.
-
-
-                      NOTE: The amount field is an Int which implements the
-                      custom method
-
-                      signatures required by gogoproto.
+                  rake:
+                    type: string
+                    format: uint64
         default:
           description: An unexpected error response.
           schema:
@@ -45134,18 +45110,9 @@ definitions:
         type: string
       owner:
         type: string
-      balance:
-        type: object
-        properties:
-          denom:
-            type: string
-          amount:
-            type: string
-        description: |-
-          Coin defines a token with a denomination and an amount.
-
-          NOTE: The amount field is an Int which implements the custom method
-          signatures required by gogoproto.
+      rake:
+        type: string
+        format: uint64
   haven.haven.MsgCreateHavenResponse:
     type: object
   haven.haven.MsgCreatePostResponse:
@@ -45193,21 +45160,9 @@ definitions:
               type: string
             owner:
               type: string
-            balance:
-              type: object
-              properties:
-                denom:
-                  type: string
-                amount:
-                  type: string
-              description: >-
-                Coin defines a token with a denomination and an amount.
-
-
-                NOTE: The amount field is an Int which implements the custom
-                method
-
-                signatures required by gogoproto.
+            rake:
+              type: string
+              format: uint64
       pagination:
         type: object
         properties:
@@ -45304,21 +45259,9 @@ definitions:
             type: string
           owner:
             type: string
-          balance:
-            type: object
-            properties:
-              denom:
-                type: string
-              amount:
-                type: string
-            description: >-
-              Coin defines a token with a denomination and an amount.
-
-
-              NOTE: The amount field is an Int which implements the custom
-              method
-
-              signatures required by gogoproto.
+          rake:
+            type: string
+            format: uint64
   haven.haven.QueryGetPostResponse:
     type: object
     properties:

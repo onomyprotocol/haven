@@ -1,7 +1,6 @@
 /* eslint-disable */
 import * as Long from "long";
 import { util, configure, Writer, Reader } from "protobufjs/minimal";
-import { Coin } from "../cosmos/base/v1beta1/coin";
 
 export const protobufPackage = "haven.haven";
 
@@ -9,10 +8,10 @@ export interface Haven {
   uid: number;
   name: string;
   owner: string;
-  balance: Coin | undefined;
+  rake: number;
 }
 
-const baseHaven: object = { uid: 0, name: "", owner: "" };
+const baseHaven: object = { uid: 0, name: "", owner: "", rake: 0 };
 
 export const Haven = {
   encode(message: Haven, writer: Writer = Writer.create()): Writer {
@@ -25,8 +24,8 @@ export const Haven = {
     if (message.owner !== "") {
       writer.uint32(26).string(message.owner);
     }
-    if (message.balance !== undefined) {
-      Coin.encode(message.balance, writer.uint32(34).fork()).ldelim();
+    if (message.rake !== 0) {
+      writer.uint32(32).uint64(message.rake);
     }
     return writer;
   },
@@ -48,7 +47,7 @@ export const Haven = {
           message.owner = reader.string();
           break;
         case 4:
-          message.balance = Coin.decode(reader, reader.uint32());
+          message.rake = longToNumber(reader.uint64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -75,10 +74,10 @@ export const Haven = {
     } else {
       message.owner = "";
     }
-    if (object.balance !== undefined && object.balance !== null) {
-      message.balance = Coin.fromJSON(object.balance);
+    if (object.rake !== undefined && object.rake !== null) {
+      message.rake = Number(object.rake);
     } else {
-      message.balance = undefined;
+      message.rake = 0;
     }
     return message;
   },
@@ -88,10 +87,7 @@ export const Haven = {
     message.uid !== undefined && (obj.uid = message.uid);
     message.name !== undefined && (obj.name = message.name);
     message.owner !== undefined && (obj.owner = message.owner);
-    message.balance !== undefined &&
-      (obj.balance = message.balance
-        ? Coin.toJSON(message.balance)
-        : undefined);
+    message.rake !== undefined && (obj.rake = message.rake);
     return obj;
   },
 
@@ -112,10 +108,10 @@ export const Haven = {
     } else {
       message.owner = "";
     }
-    if (object.balance !== undefined && object.balance !== null) {
-      message.balance = Coin.fromPartial(object.balance);
+    if (object.rake !== undefined && object.rake !== null) {
+      message.rake = object.rake;
     } else {
-      message.balance = undefined;
+      message.rake = 0;
     }
     return message;
   },

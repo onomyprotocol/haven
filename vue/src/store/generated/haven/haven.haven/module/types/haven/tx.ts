@@ -3,9 +3,11 @@ import { Reader, Writer } from "protobufjs/minimal";
 
 export const protobufPackage = "haven.haven";
 
+/** Rake is a two digit percentage */
 export interface MsgCreateHaven {
   creator: string;
   name: string;
+  rake: string;
 }
 
 export interface MsgCreateHavenResponse {}
@@ -19,7 +21,7 @@ export interface MsgCreatePost {
 
 export interface MsgCreatePostResponse {}
 
-const baseMsgCreateHaven: object = { creator: "", name: "" };
+const baseMsgCreateHaven: object = { creator: "", name: "", rake: "" };
 
 export const MsgCreateHaven = {
   encode(message: MsgCreateHaven, writer: Writer = Writer.create()): Writer {
@@ -28,6 +30,9 @@ export const MsgCreateHaven = {
     }
     if (message.name !== "") {
       writer.uint32(18).string(message.name);
+    }
+    if (message.rake !== "") {
+      writer.uint32(26).string(message.rake);
     }
     return writer;
   },
@@ -44,6 +49,9 @@ export const MsgCreateHaven = {
           break;
         case 2:
           message.name = reader.string();
+          break;
+        case 3:
+          message.rake = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -65,6 +73,11 @@ export const MsgCreateHaven = {
     } else {
       message.name = "";
     }
+    if (object.rake !== undefined && object.rake !== null) {
+      message.rake = String(object.rake);
+    } else {
+      message.rake = "";
+    }
     return message;
   },
 
@@ -72,6 +85,7 @@ export const MsgCreateHaven = {
     const obj: any = {};
     message.creator !== undefined && (obj.creator = message.creator);
     message.name !== undefined && (obj.name = message.name);
+    message.rake !== undefined && (obj.rake = message.rake);
     return obj;
   },
 
@@ -86,6 +100,11 @@ export const MsgCreateHaven = {
       message.name = object.name;
     } else {
       message.name = "";
+    }
+    if (object.rake !== undefined && object.rake !== null) {
+      message.rake = object.rake;
+    } else {
+      message.rake = "";
     }
     return message;
   },

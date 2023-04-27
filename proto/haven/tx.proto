@@ -12,9 +12,11 @@ service Msg {
 // this line is used by starport scaffolding # proto/tx/rpc
 }
 
+// Rake is a two digit percentage
 message MsgCreateHaven {
   string creator = 1;
   string name = 2;
+  string rake = 3;
 }
 
 message MsgCreateHavenResponse {

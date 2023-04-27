@@ -9,7 +9,6 @@ message Haven {
   uint64 uid = 1; 
   string name = 2; 
   string owner = 3; 
-  cosmos.base.v1beta1.Coin balance = 4 [(gogoproto.nullable) = false]; 
-  
+  uint64 rake = 4;
 }
 
