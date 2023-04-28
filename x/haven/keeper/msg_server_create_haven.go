@@ -25,10 +25,11 @@ func (k msgServer) CreateHaven(goCtx context.Context, msg *types.MsgCreateHaven)
 	count := k.GetUidCount(ctx)
 
 	haven := types.Haven{
-		Uid:   count,
-		Name:  msg.Name,
-		Owner: msg.Creator,
-		Rake:  rake,
+		Uid:      count,
+		Name:     msg.Name,
+		Owner:    msg.Creator,
+		Rake:     rake,
+		Earnings: sdk.NewCoin("kudos", sdk.NewInt(0)),
 	}
 
 	k.SetHaven(ctx, haven)
