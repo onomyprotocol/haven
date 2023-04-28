@@ -1,6 +1,7 @@
 /* eslint-disable */
 import * as Long from "long";
 import { util, configure, Writer, Reader } from "protobufjs/minimal";
+import { Coin } from "../cosmos/base/v1beta1/coin";
 
 export const protobufPackage = "haven.haven";
 
@@ -9,6 +10,7 @@ export interface Haven {
   name: string;
   owner: string;
   rake: number;
+  earnings: Coin | undefined;
 }
 
 const baseHaven: object = { uid: 0, name: "", owner: "", rake: 0 };
@@ -26,6 +28,9 @@ export const Haven = {
     }
     if (message.rake !== 0) {
       writer.uint32(32).uint64(message.rake);
+    }
+    if (message.earnings !== undefined) {
+      Coin.encode(message.earnings, writer.uint32(42).fork()).ldelim();
     }
     return writer;
   },
@@ -48,6 +53,9 @@ export const Haven = {
           break;
         case 4:
           message.rake = longToNumber(reader.uint64() as Long);
+          break;
+        case 5:
+          message.earnings = Coin.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -79,6 +87,11 @@ export const Haven = {
     } else {
       message.rake = 0;
     }
+    if (object.earnings !== undefined && object.earnings !== null) {
+      message.earnings = Coin.fromJSON(object.earnings);
+    } else {
+      message.earnings = undefined;
+    }
     return message;
   },
 
@@ -88,6 +101,10 @@ export const Haven = {
     message.name !== undefined && (obj.name = message.name);
     message.owner !== undefined && (obj.owner = message.owner);
     message.rake !== undefined && (obj.rake = message.rake);
+    message.earnings !== undefined &&
+      (obj.earnings = message.earnings
+        ? Coin.toJSON(message.earnings)
+        : undefined);
     return obj;
   },
 
@@ -112,6 +129,11 @@ export const Haven = {
       message.rake = object.rake;
     } else {
       message.rake = 0;
+    }
+    if (object.earnings !== undefined && object.earnings !== null) {
+      message.earnings = Coin.fromPartial(object.earnings);
+    } else {
+      message.earnings = undefined;
     }
     return message;
   },
