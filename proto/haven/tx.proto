@@ -9,6 +9,7 @@ option go_package = "haven/x/haven/types";
 service Msg {
       rpc CreateHaven(MsgCreateHaven) returns (MsgCreateHavenResponse);
   rpc CreatePost(MsgCreatePost) returns (MsgCreatePostResponse);
+  rpc TipPost(MsgTipPost) returns (MsgTipPostResponse);
 // this line is used by starport scaffolding # proto/tx/rpc
 }
 
@@ -30,6 +31,15 @@ message MsgCreatePost {
 }
 
 message MsgCreatePostResponse {
+}
+
+message MsgTipPost {
+  string creator = 1;
+  string uid = 2;
+  string amount = 3;
+}
+
+message MsgTipPostResponse {
 }
 
 // this line is used by starport scaffolding # proto/tx/message

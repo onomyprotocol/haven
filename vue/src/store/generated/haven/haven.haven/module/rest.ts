@@ -31,6 +31,8 @@ export type HavenMsgCreateHavenResponse = object;
 
 export type HavenMsgCreatePostResponse = object;
 
+export type HavenMsgTipPostResponse = object;
+
 /**
  * Params defines the parameters for the module.
  */

@@ -21,6 +21,14 @@ export interface MsgCreatePost {
 
 export interface MsgCreatePostResponse {}
 
+export interface MsgTipPost {
+  creator: string;
+  uid: string;
+  amount: string;
+}
+
+export interface MsgTipPostResponse {}
+
 const baseMsgCreateHaven: object = { creator: "", name: "", rake: "" };
 
 export const MsgCreateHaven = {
@@ -297,11 +305,139 @@ export const MsgCreatePostResponse = {
   },
 };
 
+const baseMsgTipPost: object = { creator: "", uid: "", amount: "" };
+
+export const MsgTipPost = {
+  encode(message: MsgTipPost, writer: Writer = Writer.create()): Writer {
+    if (message.creator !== "") {
+      writer.uint32(10).string(message.creator);
+    }
+    if (message.uid !== "") {
+      writer.uint32(18).string(message.uid);
+    }
+    if (message.amount !== "") {
+      writer.uint32(26).string(message.amount);
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgTipPost {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseMsgTipPost } as MsgTipPost;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.creator = reader.string();
+          break;
+        case 2:
+          message.uid = reader.string();
+          break;
+        case 3:
+          message.amount = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgTipPost {
+    const message = { ...baseMsgTipPost } as MsgTipPost;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = String(object.creator);
+    } else {
+      message.creator = "";
+    }
+    if (object.uid !== undefined && object.uid !== null) {
+      message.uid = String(object.uid);
+    } else {
+      message.uid = "";
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = String(object.amount);
+    } else {
+      message.amount = "";
+    }
+    return message;
+  },
+
+  toJSON(message: MsgTipPost): unknown {
+    const obj: any = {};
+    message.creator !== undefined && (obj.creator = message.creator);
+    message.uid !== undefined && (obj.uid = message.uid);
+    message.amount !== undefined && (obj.amount = message.amount);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgTipPost>): MsgTipPost {
+    const message = { ...baseMsgTipPost } as MsgTipPost;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = object.creator;
+    } else {
+      message.creator = "";
+    }
+    if (object.uid !== undefined && object.uid !== null) {
+      message.uid = object.uid;
+    } else {
+      message.uid = "";
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = object.amount;
+    } else {
+      message.amount = "";
+    }
+    return message;
+  },
+};
+
+const baseMsgTipPostResponse: object = {};
+
+export const MsgTipPostResponse = {
+  encode(_: MsgTipPostResponse, writer: Writer = Writer.create()): Writer {
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgTipPostResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseMsgTipPostResponse } as MsgTipPostResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgTipPostResponse {
+    const message = { ...baseMsgTipPostResponse } as MsgTipPostResponse;
+    return message;
+  },
+
+  toJSON(_: MsgTipPostResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(_: DeepPartial<MsgTipPostResponse>): MsgTipPostResponse {
+    const message = { ...baseMsgTipPostResponse } as MsgTipPostResponse;
+    return message;
+  },
+};
+
 /** Msg defines the Msg service. */
 export interface Msg {
   CreateHaven(request: MsgCreateHaven): Promise<MsgCreateHavenResponse>;
-  /** this line is used by starport scaffolding # proto/tx/rpc */
   CreatePost(request: MsgCreatePost): Promise<MsgCreatePostResponse>;
+  /** this line is used by starport scaffolding # proto/tx/rpc */
+  TipPost(request: MsgTipPost): Promise<MsgTipPostResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -323,6 +459,12 @@ export class MsgClientImpl implements Msg {
     return promise.then((data) =>
       MsgCreatePostResponse.decode(new Reader(data))
     );
+  }
+
+  TipPost(request: MsgTipPost): Promise<MsgTipPostResponse> {
+    const data = MsgTipPost.encode(request).finish();
+    const promise = this.rpc.request("haven.haven.Msg", "TipPost", data);
+    return promise.then((data) => MsgTipPostResponse.decode(new Reader(data)));
   }
 }
 
