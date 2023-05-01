@@ -19413,6 +19413,8 @@ paths:
                       type: string
                     body:
                       type: string
+                    owner:
+                      type: string
                     haven:
                       type: string
                       format: uint64
@@ -19554,6 +19556,8 @@ paths:
                   title:
                     type: string
                   body:
+                    type: string
+                  owner:
                     type: string
                   haven:
                     type: string
@@ -45194,6 +45198,8 @@ definitions:
         type: string
       body:
         type: string
+      owner:
+        type: string
       haven:
         type: string
         format: uint64
@@ -45282,6 +45288,8 @@ definitions:
               type: string
             body:
               type: string
+            owner:
+              type: string
             haven:
               type: string
               format: uint64
@@ -45368,6 +45376,8 @@ definitions:
           title:
             type: string
           body:
+            type: string
+          owner:
             type: string
           haven:
             type: string

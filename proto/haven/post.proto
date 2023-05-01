@@ -8,9 +8,9 @@ import "cosmos/base/v1beta1/coin.proto";
 message Post {
   uint64 uid = 1; 
   string title = 2; 
-  string body = 3; 
-  uint64 haven = 4; 
-  cosmos.base.v1beta1.Coin tips = 5 [(gogoproto.nullable) = false]; 
-  
+  string body = 3;
+  string owner = 4;
+  uint64 haven = 5;
+  cosmos.base.v1beta1.Coin tips = 6 [(gogoproto.nullable) = false]; 
 }
 

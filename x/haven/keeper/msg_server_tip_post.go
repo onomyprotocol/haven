@@ -32,9 +32,20 @@ func (k msgServer) TipPost(goCtx context.Context, msg *types.MsgTipPost) (*types
 	haven, _ := k.GetHaven(ctx, post.Haven)
 
 	havenTip := (tip.Amount.Mul(sdk.NewIntFromUint64(haven.Rake))).Quo(sdk.NewInt(100))
-	userTip := tip.Amount.Sub(havenTip)
+	postTip := tip.Amount.Sub(havenTip)
 
 	haven.Earnings = haven.Earnings.AddAmount(havenTip)
+
+	havenCoins := sdk.NewCoin("kudos", havenTip)
+	postCoins := sdk.NewCoin("kudos", postTip)
+
+	// moduleAcc := sdk.AccAddress(crypto.AddressHash([]byte(types.ModuleName)))
+	creator, _ := sdk.AccAddressFromBech32(msg.Creator)
+	havenOwner, _ := sdk.AccAddressFromBech32(haven.Owner)
+	postOwner, _ := sdk.AccAddressFromBech32(post.Owner)
+
+	k.bankKeeper.SendCoins(ctx, creator, havenOwner, sdk.NewCoins(havenCoins))
+	k.bankKeeper.SendCoins(ctx, creator, postOwner, sdk.NewCoins(postCoins))
 
 	return &types.MsgTipPostResponse{}, nil
 }

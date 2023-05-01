@@ -43,6 +43,7 @@ export interface HavenPost {
   uid?: string;
   title?: string;
   body?: string;
+  owner?: string;
 
   /** @format uint64 */
   haven?: string;
