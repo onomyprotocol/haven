@@ -36,6 +36,8 @@ func (k msgServer) TipPost(goCtx context.Context, msg *types.MsgTipPost) (*types
 
 	haven.Earnings = haven.Earnings.AddAmount(havenTip)
 
+	k.SetHaven(ctx, haven)
+
 	havenCoins := sdk.NewCoin("kudos", havenTip)
 	postCoins := sdk.NewCoin("kudos", postTip)
 
