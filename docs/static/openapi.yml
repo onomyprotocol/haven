@@ -45183,6 +45183,8 @@ definitions:
     type: object
   haven.haven.MsgCreatePostResponse:
     type: object
+  haven.haven.MsgDeletePostResponse:
+    type: object
   haven.haven.MsgTipPostResponse:
     type: object
   haven.haven.Params:

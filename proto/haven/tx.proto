@@ -10,6 +10,7 @@ service Msg {
       rpc CreateHaven(MsgCreateHaven) returns (MsgCreateHavenResponse);
   rpc CreatePost(MsgCreatePost) returns (MsgCreatePostResponse);
   rpc TipPost(MsgTipPost) returns (MsgTipPostResponse);
+  rpc DeletePost(MsgDeletePost) returns (MsgDeletePostResponse);
 // this line is used by starport scaffolding # proto/tx/rpc
 }
 
@@ -40,6 +41,14 @@ message MsgTipPost {
 }
 
 message MsgTipPostResponse {
+}
+
+message MsgDeletePost {
+  string creator = 1;
+  string uid = 2;
+}
+
+message MsgDeletePostResponse {
 }
 
 // this line is used by starport scaffolding # proto/tx/message

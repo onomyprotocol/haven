@@ -29,6 +29,13 @@ export interface MsgTipPost {
 
 export interface MsgTipPostResponse {}
 
+export interface MsgDeletePost {
+  creator: string;
+  uid: string;
+}
+
+export interface MsgDeletePostResponse {}
+
 const baseMsgCreateHaven: object = { creator: "", name: "", rake: "" };
 
 export const MsgCreateHaven = {
@@ -432,12 +439,123 @@ export const MsgTipPostResponse = {
   },
 };
 
+const baseMsgDeletePost: object = { creator: "", uid: "" };
+
+export const MsgDeletePost = {
+  encode(message: MsgDeletePost, writer: Writer = Writer.create()): Writer {
+    if (message.creator !== "") {
+      writer.uint32(10).string(message.creator);
+    }
+    if (message.uid !== "") {
+      writer.uint32(18).string(message.uid);
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgDeletePost {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseMsgDeletePost } as MsgDeletePost;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.creator = reader.string();
+          break;
+        case 2:
+          message.uid = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgDeletePost {
+    const message = { ...baseMsgDeletePost } as MsgDeletePost;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = String(object.creator);
+    } else {
+      message.creator = "";
+    }
+    if (object.uid !== undefined && object.uid !== null) {
+      message.uid = String(object.uid);
+    } else {
+      message.uid = "";
+    }
+    return message;
+  },
+
+  toJSON(message: MsgDeletePost): unknown {
+    const obj: any = {};
+    message.creator !== undefined && (obj.creator = message.creator);
+    message.uid !== undefined && (obj.uid = message.uid);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgDeletePost>): MsgDeletePost {
+    const message = { ...baseMsgDeletePost } as MsgDeletePost;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = object.creator;
+    } else {
+      message.creator = "";
+    }
+    if (object.uid !== undefined && object.uid !== null) {
+      message.uid = object.uid;
+    } else {
+      message.uid = "";
+    }
+    return message;
+  },
+};
+
+const baseMsgDeletePostResponse: object = {};
+
+export const MsgDeletePostResponse = {
+  encode(_: MsgDeletePostResponse, writer: Writer = Writer.create()): Writer {
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgDeletePostResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseMsgDeletePostResponse } as MsgDeletePostResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgDeletePostResponse {
+    const message = { ...baseMsgDeletePostResponse } as MsgDeletePostResponse;
+    return message;
+  },
+
+  toJSON(_: MsgDeletePostResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(_: DeepPartial<MsgDeletePostResponse>): MsgDeletePostResponse {
+    const message = { ...baseMsgDeletePostResponse } as MsgDeletePostResponse;
+    return message;
+  },
+};
+
 /** Msg defines the Msg service. */
 export interface Msg {
   CreateHaven(request: MsgCreateHaven): Promise<MsgCreateHavenResponse>;
   CreatePost(request: MsgCreatePost): Promise<MsgCreatePostResponse>;
-  /** this line is used by starport scaffolding # proto/tx/rpc */
   TipPost(request: MsgTipPost): Promise<MsgTipPostResponse>;
+  /** this line is used by starport scaffolding # proto/tx/rpc */
+  DeletePost(request: MsgDeletePost): Promise<MsgDeletePostResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -465,6 +583,14 @@ export class MsgClientImpl implements Msg {
     const data = MsgTipPost.encode(request).finish();
     const promise = this.rpc.request("haven.haven.Msg", "TipPost", data);
     return promise.then((data) => MsgTipPostResponse.decode(new Reader(data)));
+  }
+
+  DeletePost(request: MsgDeletePost): Promise<MsgDeletePostResponse> {
+    const data = MsgDeletePost.encode(request).finish();
+    const promise = this.rpc.request("haven.haven.Msg", "DeletePost", data);
+    return promise.then((data) =>
+      MsgDeletePostResponse.decode(new Reader(data))
+    );
   }
 }
 
