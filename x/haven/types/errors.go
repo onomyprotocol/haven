@@ -14,4 +14,6 @@ var (
 	ErrHavenDoesNotExist = sdkerrors.Register(ModuleName, 2, "the haven does not exist") // nolint: gomnd
 	// ErrPostDoesNotExist - post does not exist
 	ErrPostDoesNotExist = sdkerrors.Register(ModuleName, 3, "the post does not exist") // nolint: gomnd
+	// ErrNotPostAdmin - not post admin
+	ErrNotPostAdmin = sdkerrors.Register(ModuleName, 4, "msg creator does is not post admin") // nolint: gomnd
 )
