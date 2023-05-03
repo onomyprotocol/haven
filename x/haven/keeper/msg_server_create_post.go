@@ -25,6 +25,7 @@ func (k msgServer) CreatePost(goCtx context.Context, msg *types.MsgCreatePost) (
 		Uid:   count,
 		Title: msg.Title,
 		Body:  msg.Body,
+		Owner: msg.Creator,
 		Haven: havenUid,
 		Tips:  sdk.NewCoin("kudos", sdk.NewInt(0)),
 	}

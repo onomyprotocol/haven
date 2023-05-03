@@ -394,6 +394,7 @@ func New(
 		keys[havenmoduletypes.StoreKey],
 		keys[havenmoduletypes.MemStoreKey],
 		app.GetSubspace(havenmoduletypes.ModuleName),
+		app.BankKeeper,
 	)
 	havenModule := havenmodule.NewAppModule(appCodec, app.HavenKeeper, app.AccountKeeper, app.BankKeeper)
 

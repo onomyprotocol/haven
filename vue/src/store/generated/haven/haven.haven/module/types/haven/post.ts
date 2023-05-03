@@ -9,11 +9,12 @@ export interface Post {
   uid: number;
   title: string;
   body: string;
+  owner: string;
   haven: number;
   tips: Coin | undefined;
 }
 
-const basePost: object = { uid: 0, title: "", body: "", haven: 0 };
+const basePost: object = { uid: 0, title: "", body: "", owner: "", haven: 0 };
 
 export const Post = {
   encode(message: Post, writer: Writer = Writer.create()): Writer {
@@ -26,11 +27,14 @@ export const Post = {
     if (message.body !== "") {
       writer.uint32(26).string(message.body);
     }
+    if (message.owner !== "") {
+      writer.uint32(34).string(message.owner);
+    }
     if (message.haven !== 0) {
-      writer.uint32(32).uint64(message.haven);
+      writer.uint32(40).uint64(message.haven);
     }
     if (message.tips !== undefined) {
-      Coin.encode(message.tips, writer.uint32(42).fork()).ldelim();
+      Coin.encode(message.tips, writer.uint32(50).fork()).ldelim();
     }
     return writer;
   },
@@ -52,9 +56,12 @@ export const Post = {
           message.body = reader.string();
           break;
         case 4:
-          message.haven = longToNumber(reader.uint64() as Long);
+          message.owner = reader.string();
           break;
         case 5:
+          message.haven = longToNumber(reader.uint64() as Long);
+          break;
+        case 6:
           message.tips = Coin.decode(reader, reader.uint32());
           break;
         default:
@@ -82,6 +89,11 @@ export const Post = {
     } else {
       message.body = "";
     }
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = String(object.owner);
+    } else {
+      message.owner = "";
+    }
     if (object.haven !== undefined && object.haven !== null) {
       message.haven = Number(object.haven);
     } else {
@@ -100,6 +112,7 @@ export const Post = {
     message.uid !== undefined && (obj.uid = message.uid);
     message.title !== undefined && (obj.title = message.title);
     message.body !== undefined && (obj.body = message.body);
+    message.owner !== undefined && (obj.owner = message.owner);
     message.haven !== undefined && (obj.haven = message.haven);
     message.tips !== undefined &&
       (obj.tips = message.tips ? Coin.toJSON(message.tips) : undefined);
@@ -122,6 +135,11 @@ export const Post = {
       message.body = object.body;
     } else {
       message.body = "";
+    }
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    } else {
+      message.owner = "";
     }
     if (object.haven !== undefined && object.haven !== null) {
       message.haven = object.haven;
