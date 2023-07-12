@@ -18,7 +18,7 @@ func (k Keeper) SetHaven(ctx sdk.Context, haven types.Haven) {
 	), b)
 
 	storeName := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.HavenNamePrefix))
-	var bz []byte
+	bz := make([]byte, 8)
 	binary.BigEndian.PutUint64(bz, haven.Uid)
 	storeName.Set(types.HavenNameKey(
 		haven.Name,

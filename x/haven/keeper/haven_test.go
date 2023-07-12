@@ -18,7 +18,7 @@ var _ = strconv.IntSize
 func createNHaven(keeper *keeper.Keeper, ctx sdk.Context, n int) []types.Haven {
 	items := make([]types.Haven, n)
 	for i := range items {
-		items[i].Uid = uint64(i)
+		items[i].Uid = uint64(i) + 1
 
 		keeper.SetHaven(ctx, items[i])
 	}

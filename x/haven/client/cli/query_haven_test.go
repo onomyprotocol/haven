@@ -29,7 +29,7 @@ func networkWithHavenObjects(t *testing.T, n int) (*network.Network, []types.Hav
 
 	for i := 0; i < n; i++ {
 		haven := types.Haven{
-			Uid: uint64(i),
+			Uid: uint64(i + 1),
 		}
 		nullify.Fill(&haven)
 		state.HavenList = append(state.HavenList, haven)
