@@ -3,8 +3,8 @@ package keeper
 import (
 	"testing"
 
-	"haven/x/haven/keeper"
-	"haven/x/haven/types"
+	"github.com/onomyprotocol/haven/x/haven/keeper"
+	"github.com/onomyprotocol/haven/x/haven/types"
 
 	"github.com/cosmos/cosmos-sdk/codec"
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"

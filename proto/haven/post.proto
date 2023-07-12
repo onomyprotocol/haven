@@ -1,16 +1,16 @@
 syntax = "proto3";
 package haven.haven;
 
-option go_package = "haven/x/haven/types";
-import "gogoproto/gogo.proto"; 
-import "cosmos/base/v1beta1/coin.proto"; 
+option go_package = "github.com/onomyprotocol/haven/x/haven/types";
+import "gogoproto/gogo.proto";
+import "cosmos/base/v1beta1/coin.proto";
 
 message Post {
-  uint64 uid = 1; 
-  string title = 2; 
+  uint64 uid = 1;
+  string title = 2;
   string body = 3;
   string owner = 4;
   uint64 haven = 5;
-  cosmos.base.v1beta1.Coin tips = 6 [(gogoproto.nullable) = false]; 
+  cosmos.base.v1beta1.Coin tips = 6 [(gogoproto.nullable) = false];
 }
 

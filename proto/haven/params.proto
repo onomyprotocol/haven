@@ -3,10 +3,9 @@ package haven.haven;
 
 import "gogoproto/gogo.proto";
 
-option go_package = "haven/x/haven/types";
+option go_package = "github.com/onomyprotocol/haven/x/haven/types";
 
 // Params defines the parameters for the module.
 message Params {
   option (gogoproto.goproto_stringer) = false;
-  
 }

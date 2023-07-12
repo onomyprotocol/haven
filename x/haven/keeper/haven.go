@@ -2,7 +2,8 @@ package keeper
 
 import (
 	"encoding/binary"
-	"haven/x/haven/types"
+
+	"github.com/onomyprotocol/haven/x/haven/types"
 
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"

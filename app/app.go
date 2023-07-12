@@ -98,11 +98,11 @@ import (
 	monitoringpkeeper "github.com/tendermint/spn/x/monitoringp/keeper"
 	monitoringptypes "github.com/tendermint/spn/x/monitoringp/types"
 
-	"haven/docs"
+	"github.com/onomyprotocol/haven/docs"
 
-	havenmodule "haven/x/haven"
-	havenmodulekeeper "haven/x/haven/keeper"
-	havenmoduletypes "haven/x/haven/types"
+	havenmodule "github.com/onomyprotocol/haven/x/haven"
+	havenmodulekeeper "github.com/onomyprotocol/haven/x/haven/keeper"
+	havenmoduletypes "github.com/onomyprotocol/haven/x/haven/types"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 )
 

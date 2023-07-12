@@ -5,9 +5,9 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
+	"github.com/onomyprotocol/haven/x/haven/types"
 	"github.com/spf13/cast"
 	"github.com/spf13/cobra"
-	"haven/x/haven/types"
 )
 
 func CmdListPost() *cobra.Command {

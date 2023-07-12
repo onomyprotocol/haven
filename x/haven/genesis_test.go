@@ -3,11 +3,11 @@ package haven_test
 import (
 	"testing"
 
+	keepertest "github.com/onomyprotocol/haven/testutil/keeper"
+	"github.com/onomyprotocol/haven/testutil/nullify"
+	"github.com/onomyprotocol/haven/x/haven"
+	"github.com/onomyprotocol/haven/x/haven/types"
 	"github.com/stretchr/testify/require"
-	keepertest "haven/testutil/keeper"
-	"haven/testutil/nullify"
-	"haven/x/haven"
-	"haven/x/haven/types"
 )
 
 func TestGenesis(t *testing.T) {

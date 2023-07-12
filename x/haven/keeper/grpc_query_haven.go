@@ -6,9 +6,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/query"
+	"github.com/onomyprotocol/haven/x/haven/types"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"haven/x/haven/types"
 )
 
 func (k Keeper) HavenAll(c context.Context, req *types.QueryAllHavenRequest) (*types.QueryAllHavenResponse, error) {

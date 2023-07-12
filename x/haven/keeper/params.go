@@ -2,7 +2,7 @@ package keeper
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"haven/x/haven/types"
+	"github.com/onomyprotocol/haven/x/haven/types"
 )
 
 // GetParams get all parameters as types.Params

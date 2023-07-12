@@ -16,9 +16,9 @@ import (
 	cdctypes "github.com/cosmos/cosmos-sdk/codec/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
-	"haven/x/haven/client/cli"
-	"haven/x/haven/keeper"
-	"haven/x/haven/types"
+	"github.com/onomyprotocol/haven/x/haven/client/cli"
+	"github.com/onomyprotocol/haven/x/haven/keeper"
+	"github.com/onomyprotocol/haven/x/haven/types"
 )
 
 var (

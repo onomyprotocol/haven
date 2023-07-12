@@ -3,8 +3,8 @@ package types_test
 import (
 	"testing"
 
+	"github.com/onomyprotocol/haven/x/haven/types"
 	"github.com/stretchr/testify/require"
-	"haven/x/haven/types"
 )
 
 func TestGenesisState_Validate(t *testing.T) {

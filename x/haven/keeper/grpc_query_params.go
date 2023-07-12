@@ -4,9 +4,9 @@ import (
 	"context"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/onomyprotocol/haven/x/haven/types"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"haven/x/haven/types"
 )
 
 func (k Keeper) Params(c context.Context, req *types.QueryParamsRequest) (*types.QueryParamsResponse, error) {

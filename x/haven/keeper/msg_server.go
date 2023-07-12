@@ -1,7 +1,7 @@
 package keeper
 
 import (
-	"haven/x/haven/types"
+	"github.com/onomyprotocol/haven/x/haven/types"
 )
 
 type msgServer struct {

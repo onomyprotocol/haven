@@ -10,7 +10,7 @@ import (
 	// "github.com/cosmos/cosmos-sdk/client/flags"
 	// sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"haven/x/haven/types"
+	"github.com/onomyprotocol/haven/x/haven/types"
 )
 
 // GetQueryCmd returns the cli query commands for this module

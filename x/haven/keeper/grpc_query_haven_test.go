@@ -10,9 +10,9 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	keepertest "haven/testutil/keeper"
-	"haven/testutil/nullify"
-	"haven/x/haven/types"
+	keepertest "github.com/onomyprotocol/haven/testutil/keeper"
+	"github.com/onomyprotocol/haven/testutil/nullify"
+	"github.com/onomyprotocol/haven/x/haven/types"
 )
 
 // Prevent strconv unused error

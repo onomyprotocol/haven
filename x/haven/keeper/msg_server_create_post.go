@@ -3,7 +3,7 @@ package keeper
 import (
 	"context"
 
-	"haven/x/haven/types"
+	"github.com/onomyprotocol/haven/x/haven/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"

@@ -7,7 +7,7 @@ import "haven/haven.proto";
 import "haven/post.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
-option go_package = "haven/x/haven/types";
+option go_package = "github.com/onomyprotocol/haven/x/haven/types";
 
 // GenesisState defines the haven module's genesis state.
 message GenesisState {

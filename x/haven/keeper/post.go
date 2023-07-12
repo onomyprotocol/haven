@@ -3,7 +3,7 @@ package keeper
 import (
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"haven/x/haven/types"
+	"github.com/onomyprotocol/haven/x/haven/types"
 )
 
 // SetPost set a specific post in the store from its index

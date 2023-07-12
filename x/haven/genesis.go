@@ -2,8 +2,8 @@ package haven
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"haven/x/haven/keeper"
-	"haven/x/haven/types"
+	"github.com/onomyprotocol/haven/x/haven/keeper"
+	"github.com/onomyprotocol/haven/x/haven/types"
 )
 
 // InitGenesis initializes the capability module's state from a provided genesis
