@@ -39,6 +39,7 @@ func TestHavenGet(t *testing.T) {
 		)
 	}
 }
+
 func TestHavenRemove(t *testing.T) {
 	keeper, ctx := keepertest.HavenKeeper(t)
 	items := createNHaven(keeper, ctx, 10)

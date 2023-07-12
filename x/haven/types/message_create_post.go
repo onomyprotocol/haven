@@ -9,7 +9,7 @@ const TypeMsgCreatePost = "create_post"
 
 var _ sdk.Msg = &MsgCreatePost{}
 
-func NewMsgCreatePost(creator string, title string, body string, haven string) *MsgCreatePost {
+func NewMsgCreatePost(creator, title, body, haven string) *MsgCreatePost {
 	return &MsgCreatePost{
 		Creator: creator,
 		Title:   title,

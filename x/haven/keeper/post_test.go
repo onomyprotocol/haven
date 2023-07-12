@@ -39,6 +39,7 @@ func TestPostGet(t *testing.T) {
 		)
 	}
 }
+
 func TestPostRemove(t *testing.T) {
 	keeper, ctx := keepertest.HavenKeeper(t)
 	items := createNPost(keeper, ctx, 10)

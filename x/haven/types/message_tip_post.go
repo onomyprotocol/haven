@@ -9,7 +9,7 @@ const TypeMsgTipPost = "tip_post"
 
 var _ sdk.Msg = &MsgTipPost{}
 
-func NewMsgTipPost(creator string, uid string, amount string) *MsgTipPost {
+func NewMsgTipPost(creator, uid, amount string) *MsgTipPost {
 	return &MsgTipPost{
 		Creator: creator,
 		Uid:     uid,

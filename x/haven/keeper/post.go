@@ -19,7 +19,6 @@ func (k Keeper) SetPost(ctx sdk.Context, post types.Post) {
 func (k Keeper) GetPost(
 	ctx sdk.Context,
 	uid uint64,
-
 ) (val types.Post, found bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.PostKeyPrefix))
 
@@ -38,7 +37,6 @@ func (k Keeper) GetPost(
 func (k Keeper) RemovePost(
 	ctx sdk.Context,
 	uid uint64,
-
 ) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.PostKeyPrefix))
 	store.Delete(types.PostKey(

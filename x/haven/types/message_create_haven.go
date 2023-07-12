@@ -11,7 +11,7 @@ const TypeMsgCreateHaven = "create_haven"
 
 var _ sdk.Msg = &MsgCreateHaven{}
 
-func NewMsgCreateHaven(creator string, name string) *MsgCreateHaven {
+func NewMsgCreateHaven(creator, name string) *MsgCreateHaven {
 	return &MsgCreateHaven{
 		Creator: creator,
 		Name:    name,
