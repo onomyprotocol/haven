@@ -98,11 +98,11 @@ import (
 	monitoringpkeeper "github.com/tendermint/spn/x/monitoringp/keeper"
 	monitoringptypes "github.com/tendermint/spn/x/monitoringp/types"
 
-	"haven/docs"
+	"github.com/onomyprotocol/haven/docs"
 
-	havenmodule "haven/x/haven"
-	havenmodulekeeper "haven/x/haven/keeper"
-	havenmoduletypes "haven/x/haven/types"
+	havenmodule "github.com/onomyprotocol/haven/x/haven"
+	havenmodulekeeper "github.com/onomyprotocol/haven/x/haven/keeper"
+	havenmoduletypes "github.com/onomyprotocol/haven/x/haven/types"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 )
 
@@ -394,7 +394,6 @@ func New(
 		keys[havenmoduletypes.StoreKey],
 		keys[havenmoduletypes.MemStoreKey],
 		app.GetSubspace(havenmoduletypes.ModuleName),
-		app.BankKeeper,
 	)
 	havenModule := havenmodule.NewAppModule(appCodec, app.HavenKeeper, app.AccountKeeper, app.BankKeeper)
 
@@ -411,7 +410,7 @@ func New(
 
 	// NOTE: we may consider parsing `appOpts` inside module constructors. For the moment
 	// we prefer to be more strict in what arguments the modules expect.
-	var skipGenesisInvariants = cast.ToBool(appOpts.Get(crisis.FlagSkipGenesisInvariants))
+	skipGenesisInvariants := cast.ToBool(appOpts.Get(crisis.FlagSkipGenesisInvariants))
 
 	// NOTE: Any module instantiated in the module manager that is later modified
 	// must be passed by reference here.

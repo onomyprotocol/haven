@@ -9,7 +9,7 @@ const TypeMsgDeletePost = "delete_post"
 
 var _ sdk.Msg = &MsgDeletePost{}
 
-func NewMsgDeletePost(creator string, uid string) *MsgDeletePost {
+func NewMsgDeletePost(creator, uid string) *MsgDeletePost {
 	return &MsgDeletePost{
 		Creator: creator,
 		Uid:     uid,

@@ -2,7 +2,8 @@ package keeper
 
 import (
 	"encoding/binary"
-	"haven/x/haven/types"
+
+	"github.com/onomyprotocol/haven/x/haven/types"
 
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -17,19 +18,17 @@ func (k Keeper) SetHaven(ctx sdk.Context, haven types.Haven) {
 	), b)
 
 	storeName := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.HavenNamePrefix))
-	var bz []byte
+	bz := make([]byte, 8)
 	binary.BigEndian.PutUint64(bz, haven.Uid)
 	storeName.Set(types.HavenNameKey(
 		haven.Name,
 	), bz)
-
 }
 
 // GetHaven returns a haven from uid
 func (k Keeper) GetHaven(
 	ctx sdk.Context,
 	uid uint64,
-
 ) (val types.Haven, found bool) {
 	if uid == 0 {
 		return val, false
@@ -70,7 +69,6 @@ func (k Keeper) GetHavenUid(
 func (k Keeper) RemoveHaven(
 	ctx sdk.Context,
 	uid uint64,
-
 ) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.HavenKeyPrefix))
 	store.Delete(types.HavenKey(

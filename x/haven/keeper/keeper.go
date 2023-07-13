@@ -5,7 +5,7 @@ import (
 
 	"github.com/tendermint/tendermint/libs/log"
 
-	"haven/x/haven/types"
+	"github.com/onomyprotocol/haven/x/haven/types"
 
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -27,7 +27,6 @@ func NewKeeper(
 	storeKey,
 	memKey sdk.StoreKey,
 	ps paramtypes.Subspace,
-	bankKeeper types.BankKeeper,
 ) *Keeper {
 	// set KeyTable if it has not already been set
 	if !ps.HasKeyTable() {
@@ -35,7 +34,6 @@ func NewKeeper(
 	}
 
 	return &Keeper{
-
 		cdc:        cdc,
 		storeKey:   storeKey,
 		memKey:     memKey,

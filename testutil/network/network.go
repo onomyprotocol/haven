@@ -18,7 +18,7 @@ import (
 	tmrand "github.com/tendermint/tendermint/libs/rand"
 	tmdb "github.com/tendermint/tm-db"
 
-	"haven/app"
+	"github.com/onomyprotocol/haven/app"
 )
 
 type (

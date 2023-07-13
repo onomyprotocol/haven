@@ -6,8 +6,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
-	"haven/x/haven/keeper"
-	"haven/x/haven/types"
+	"github.com/onomyprotocol/haven/x/haven/keeper"
+	"github.com/onomyprotocol/haven/x/haven/types"
 )
 
 func SimulateMsgTipPost(

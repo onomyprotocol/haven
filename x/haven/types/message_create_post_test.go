@@ -4,8 +4,8 @@ import (
 	"testing"
 
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	"github.com/onomyprotocol/haven/testutil/sample"
 	"github.com/stretchr/testify/require"
-	"haven/testutil/sample"
 )
 
 func TestMsgCreatePost_ValidateBasic(t *testing.T) {

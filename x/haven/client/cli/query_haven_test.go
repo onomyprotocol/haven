@@ -12,10 +12,10 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"haven/testutil/network"
-	"haven/testutil/nullify"
-	"haven/x/haven/client/cli"
-	"haven/x/haven/types"
+	"github.com/onomyprotocol/haven/testutil/network"
+	"github.com/onomyprotocol/haven/testutil/nullify"
+	"github.com/onomyprotocol/haven/x/haven/client/cli"
+	"github.com/onomyprotocol/haven/x/haven/types"
 )
 
 // Prevent strconv unused error
@@ -29,7 +29,7 @@ func networkWithHavenObjects(t *testing.T, n int) (*network.Network, []types.Hav
 
 	for i := 0; i < n; i++ {
 		haven := types.Haven{
-			Uid: uint64(i),
+			Uid: uint64(i + 1),
 		}
 		nullify.Fill(&haven)
 		state.HavenList = append(state.HavenList, haven)

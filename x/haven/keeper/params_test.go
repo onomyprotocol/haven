@@ -3,9 +3,9 @@ package keeper_test
 import (
 	"testing"
 
+	testkeeper "github.com/onomyprotocol/haven/testutil/keeper"
+	"github.com/onomyprotocol/haven/x/haven/types"
 	"github.com/stretchr/testify/require"
-	testkeeper "haven/testutil/keeper"
-	"haven/x/haven/types"
 )
 
 func TestGetParams(t *testing.T) {

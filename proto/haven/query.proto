@@ -10,33 +10,33 @@ import "haven/post.proto";
 import "cosmos/base/v1beta1/coin.proto";
 import "gogoproto/gogo.proto";
 
-option go_package = "haven/x/haven/types";
+option go_package = "github.com/onomyprotocol/haven/x/haven/types";
 
 // Query defines the gRPC querier service.
 service Query {
   // Parameters queries the parameters of the module.
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
-    option (google.api.http).get = "/haven/haven/params";
-  }
-  // Queries a Haven by index.
-	rpc Haven(QueryGetHavenRequest) returns (QueryGetHavenResponse) {
-		option (google.api.http).get = "/haven/haven/haven/{uid}";
-	}
+  option (google.api.http).get = "/haven/haven/params";
+}
+// Queries a Haven by index.
+rpc Haven(QueryGetHavenRequest) returns (QueryGetHavenResponse) {
+  option (google.api.http).get = "/haven/haven/haven/{uid}";
+}
 
-	// Queries a list of Haven items.
-	rpc HavenAll(QueryAllHavenRequest) returns (QueryAllHavenResponse) {
-		option (google.api.http).get = "/haven/haven/haven";
-	}
+// Queries a list of Haven items.
+rpc HavenAll(QueryAllHavenRequest) returns (QueryAllHavenResponse) {
+  option (google.api.http).get = "/haven/haven/haven";
+}
 
 // Queries a Post by index.
-	rpc Post(QueryGetPostRequest) returns (QueryGetPostResponse) {
-		option (google.api.http).get = "/haven/haven/post/{uid}";
-	}
+rpc Post(QueryGetPostRequest) returns (QueryGetPostResponse) {
+  option (google.api.http).get = "/haven/haven/post/{uid}";
+}
 
-	// Queries a list of Post items.
-	rpc PostAll(QueryAllPostRequest) returns (QueryAllPostResponse) {
-		option (google.api.http).get = "/haven/haven/post";
-	}
+// Queries a list of Post items.
+rpc PostAll(QueryAllPostRequest) returns (QueryAllPostResponse) {
+  option (google.api.http).get = "/haven/haven/post";
+}
 
 // this line is used by starport scaffolding # 2
 }
@@ -51,39 +51,37 @@ message QueryParamsResponse {
 }
 
 message QueryGetHavenRequest {
-	  uint64 uid = 1;
-
+  uint64 uid = 1;
 }
 
 message QueryGetHavenResponse {
-	Haven haven = 1 [(gogoproto.nullable) = false];
+  Haven haven = 1 [(gogoproto.nullable) = false];
 }
 
 message QueryAllHavenRequest {
-	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
 }
 
 message QueryAllHavenResponse {
-	repeated Haven haven = 1 [(gogoproto.nullable) = false];
-	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+  repeated Haven haven = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 message QueryGetPostRequest {
-	  uint64 uid = 1;
-
+  uint64 uid = 1;
 }
 
 message QueryGetPostResponse {
-	Post post = 1 [(gogoproto.nullable) = false];
+  Post post = 1 [(gogoproto.nullable) = false];
 }
 
 message QueryAllPostRequest {
-	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
 }
 
 message QueryAllPostResponse {
-	repeated Post post = 1 [(gogoproto.nullable) = false];
-	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+  repeated Post post = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 // this line is used by starport scaffolding # 3

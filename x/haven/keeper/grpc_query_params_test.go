@@ -4,9 +4,9 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	testkeeper "github.com/onomyprotocol/haven/testutil/keeper"
+	"github.com/onomyprotocol/haven/x/haven/types"
 	"github.com/stretchr/testify/require"
-	testkeeper "haven/testutil/keeper"
-	"haven/x/haven/types"
 )
 
 func TestParamsQuery(t *testing.T) {

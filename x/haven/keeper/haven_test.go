@@ -5,11 +5,11 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	keepertest "github.com/onomyprotocol/haven/testutil/keeper"
+	"github.com/onomyprotocol/haven/testutil/nullify"
+	"github.com/onomyprotocol/haven/x/haven/keeper"
+	"github.com/onomyprotocol/haven/x/haven/types"
 	"github.com/stretchr/testify/require"
-	keepertest "haven/testutil/keeper"
-	"haven/testutil/nullify"
-	"haven/x/haven/keeper"
-	"haven/x/haven/types"
 )
 
 // Prevent strconv unused error
@@ -18,7 +18,7 @@ var _ = strconv.IntSize
 func createNHaven(keeper *keeper.Keeper, ctx sdk.Context, n int) []types.Haven {
 	items := make([]types.Haven, n)
 	for i := range items {
-		items[i].Uid = uint64(i)
+		items[i].Uid = uint64(i) + 1
 
 		keeper.SetHaven(ctx, items[i])
 	}
@@ -39,6 +39,7 @@ func TestHavenGet(t *testing.T) {
 		)
 	}
 }
+
 func TestHavenRemove(t *testing.T) {
 	keeper, ctx := keepertest.HavenKeeper(t)
 	items := createNHaven(keeper, ctx, 10)

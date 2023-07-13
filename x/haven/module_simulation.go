@@ -9,9 +9,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
-	"haven/testutil/sample"
-	havensimulation "haven/x/haven/simulation"
-	"haven/x/haven/types"
+	"github.com/onomyprotocol/haven/testutil/sample"
+	havensimulation "github.com/onomyprotocol/haven/x/haven/simulation"
+	"github.com/onomyprotocol/haven/x/haven/types"
 )
 
 // avoid unused import issue
@@ -63,7 +63,6 @@ func (AppModule) ProposalContents(_ module.SimulationState) []simtypes.WeightedP
 
 // RandomizedParams creates randomized  param changes for the simulator
 func (am AppModule) RandomizedParams(_ *rand.Rand) []simtypes.ParamChange {
-
 	return []simtypes.ParamChange{}
 }
 

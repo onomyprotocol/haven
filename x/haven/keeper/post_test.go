@@ -5,11 +5,11 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	keepertest "github.com/onomyprotocol/haven/testutil/keeper"
+	"github.com/onomyprotocol/haven/testutil/nullify"
+	"github.com/onomyprotocol/haven/x/haven/keeper"
+	"github.com/onomyprotocol/haven/x/haven/types"
 	"github.com/stretchr/testify/require"
-	keepertest "haven/testutil/keeper"
-	"haven/testutil/nullify"
-	"haven/x/haven/keeper"
-	"haven/x/haven/types"
 )
 
 // Prevent strconv unused error
@@ -39,6 +39,7 @@ func TestPostGet(t *testing.T) {
 		)
 	}
 }
+
 func TestPostRemove(t *testing.T) {
 	keeper, ctx := keepertest.HavenKeeper(t)
 	items := createNPost(keeper, ctx, 10)

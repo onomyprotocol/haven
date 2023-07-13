@@ -6,9 +6,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/query"
+	"github.com/onomyprotocol/haven/x/haven/types"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"haven/x/haven/types"
 )
 
 func (k Keeper) PostAll(c context.Context, req *types.QueryAllPostRequest) (*types.QueryAllPostResponse, error) {
@@ -22,7 +22,7 @@ func (k Keeper) PostAll(c context.Context, req *types.QueryAllPostRequest) (*typ
 	store := ctx.KVStore(k.storeKey)
 	postStore := prefix.NewStore(store, types.KeyPrefix(types.PostKeyPrefix))
 
-	pageRes, err := query.Paginate(postStore, req.Pagination, func(key []byte, value []byte) error {
+	pageRes, err := query.Paginate(postStore, req.Pagination, func(key, value []byte) error {
 		var post types.Post
 		if err := k.cdc.Unmarshal(value, &post); err != nil {
 			return err
@@ -31,7 +31,6 @@ func (k Keeper) PostAll(c context.Context, req *types.QueryAllPostRequest) (*typ
 		posts = append(posts, post)
 		return nil
 	})
-
 	if err != nil {
 		return nil, status.Error(codes.Internal, err.Error())
 	}

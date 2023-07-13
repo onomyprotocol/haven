@@ -4,8 +4,8 @@ import (
 	"testing"
 
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	"github.com/onomyprotocol/haven/testutil/sample"
 	"github.com/stretchr/testify/require"
-	"haven/testutil/sample"
 )
 
 func TestMsgCreateHaven_ValidateBasic(t *testing.T) {
@@ -21,9 +21,17 @@ func TestMsgCreateHaven_ValidateBasic(t *testing.T) {
 			},
 			err: sdkerrors.ErrInvalidAddress,
 		}, {
+			name: "invalid rake",
+			msg: MsgCreateHaven{
+				Creator: sample.AccAddress(),
+				Rake:    "invalid",
+			},
+			err: sdkerrors.ErrInvalidRequest,
+		}, {
 			name: "valid address",
 			msg: MsgCreateHaven{
 				Creator: sample.AccAddress(),
+				Rake:    "1234",
 			},
 		},
 	}
